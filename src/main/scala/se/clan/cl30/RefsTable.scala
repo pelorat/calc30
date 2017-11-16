@@ -77,7 +77,8 @@ class RefsTable(path: String) {
         case Searching.InsertionPoint(x) => Some(partition(x))
       }
     }
-    None
+    else
+      None
   }
 }
 

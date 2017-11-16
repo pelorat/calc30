@@ -5,10 +5,8 @@ import scodec.Codec
 import scodec.codecs._
 import scodec.stream.decode
 
-import scala.collection.Searching._
 import cats.effect._
 
-import scala.collection.Searching
 
 case class RefsEntry(
                   surface: Int,
@@ -69,17 +67,11 @@ class RefsTable(path: String) {
 
   private val refs: Vector[RefsEntry] = stream.runLog.unsafeRunSync()
 
-  def findRefs(entry: RefsEntry): Option[RefsEntry] = {
-    val partition = refs.filter(_ :: entry)
-    if (partition.nonEmpty) {
-      partition.search(entry)(TempOrdering) match {
-        case Searching.Found(x) => Some(partition(x))
-        case Searching.InsertionPoint(x) => Some(partition(x))
-      }
+  def findRefs(entry: RefsEntry): Option[RefsEntry] =
+    refs.filter(_ :: entry) match {
+      case IndexedSeq() => None
+      case v => Some(v.minBy(e => Math.abs(e.temp - entry.temp)))
     }
-    else
-      None
-  }
 }
 
 object RefsTable {
@@ -88,6 +80,7 @@ object RefsTable {
   def clampAltitude(alt: Long): Long = Math.min(
     Math.round(Math.max(alt, 0) / 1000.0) * 1000, 10000)
 
-  def clampWeight(weight: Long): Long = 28000 + Math.min(
-    Math.round(Math.max(weight - 28000, 0) / 2000.0) * 2000, 10850)
+  def clampWeight(weight: Long): Long =
+    Seq(28000L, 30000L, 32000L, 34000L, 36000L, 38000L, 38850L)
+      .minBy(w => Math.abs(w - weight))
 }

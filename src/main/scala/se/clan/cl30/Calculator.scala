@@ -6,7 +6,7 @@ object Calculator {
 
     val test = RefsTable("refstable.cpd")
 
-    println(test.findRefs(RefsEntry(0,0,0,10,10000,28304,15)).toString)
+    println(test.findRefs(RefsEntry(0,0,0,10,1244,29304,19)).toString)
 
   }
 

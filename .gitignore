@@ -1,0 +1,7 @@
+*.json
+*.reference
+.tags
+.tags-dep
+target/
+.project
+.idea

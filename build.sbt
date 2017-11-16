@@ -26,6 +26,9 @@ lazy val dependencies = Seq(
   "org.scodec" % "scodec-stream_2.12" % "1.1.0-M8",
 )
 
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.4"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"
+
 lazy val cl30 = (project in file("."))
   .settings(
     projectSettings,

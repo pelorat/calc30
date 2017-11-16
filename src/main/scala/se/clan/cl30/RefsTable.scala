@@ -56,10 +56,6 @@ class RefsTable(path: String) {
 
   case class Result(v1: Int, vr: Int, v2: Int, rwl: Int)
 
-  object TempOrdering extends Ordering[RefsEntry] {
-    override def compare(x: RefsEntry, y: RefsEntry): Int = x.temp - y.temp
-  }
-
   private val frames = decode.once[RefsEntry].many
 
   private val stream: fs2.Stream[IO, RefsEntry] =

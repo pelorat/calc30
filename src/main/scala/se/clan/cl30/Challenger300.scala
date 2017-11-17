@@ -16,11 +16,38 @@ limitations under the License.
 
 package se.clan.cl30
 
+class Challenger300(owe: Long = 23750, dmac: Double = 41.2) {
+
+  /**
+    * The minimum empty operating weight in lbs (2 pilots + supplies + crew)
+    */
+  val operatingWeightEmpty: Long = owe
+
+  /**
+    * The default %MAC at the minimum empty operating weight. The %MAC value
+    * is the location of the center of gravity expressed as a percentage of
+    * the MAC counted from the leading edge the wing.
+    */
+  val defaultMAC: Double = dmac
+}
+
 object Challenger300 {
-  val operatingWeightEmpty = 23750.0
-  val maximumTakeoffWeight = 38850.0
-  val minimumOperatingWeight = 23100.0
+
+  /**
+    * The mean aerodynamic chord of the wing (in centimeters)
+    */
   val meanAerodynamicChord = 290.0
-  val indexDegrees = 0.2
-  val defaultMAC = 41.2
+
+  /**
+    * The minimum operating weight (empty plane) in lbs
+    */
+  val minimumOperatingWeight = 23100.0
+
+  /**
+    * The maximum takeoff weight allowed (in lbs)
+    */
+  val maximumTakeoffWeight = 38850.0
+  private val indexDegrees = 0.2
+
+  def apply: Challenger300 = new Challenger300()
 }

@@ -13,21 +13,28 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
 package se.clan.cl30
 
-class Challenger300(owe: Long = 23750, dmac: Double = 41.2) {
+package object wbl {
 
   /**
-    * The minimum empty operating weight in lbs (2 pilots + supplies + crew)
+    * The Mean Aerodynamic Chord (MAC) of the wing in centimeters.
+    * See https://en.wikipedia.org/wiki/Chord_(aeronautics)
     */
-  val operatingWeightEmpty: Long = owe
+  val MeanAerodynamicChord = 290.0
 
   /**
-    * The default %MAC at the minimum empty operating weight. The %MAC value
-    * is the location of the center of gravity expressed as a percentage of
-    * the MAC counted from the leading edge the wing.
+    * The minimum operating weight (empty plane) in lbs
     */
-  val defaultMAC: Double = dmac
+  val MinimumOperatingWeight = 23100.0
+
+  /**
+    * The maximum takeoff weight allowed (in lbs)
+    */
+  val MaximumTakeoffWeight = 38850.0
+
+  /**
+    * Pounds per Kilogram
+    */
+  val LbsPerKg = 2.20462262
 }
-

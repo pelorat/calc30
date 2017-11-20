@@ -13,21 +13,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+package se.clan.cl30.wbl
 
-package se.clan.cl30
-
-class Challenger300(owe: Long = 23750, dmac: Double = 41.2) {
-
-  /**
-    * The minimum empty operating weight in lbs (2 pilots + supplies + crew)
-    */
-  val operatingWeightEmpty: Long = owe
+/** Base trait for the weight and balance calculations
+  */
+trait WeightDistribution {
 
   /**
-    * The default %MAC at the minimum empty operating weight. The %MAC value
-    * is the location of the center of gravity expressed as a percentage of
-    * the MAC counted from the leading edge the wing.
+    * The weight in pounds stored by this distribution
     */
-  val defaultMAC: Double = dmac
+  val weight: Double
+
+  /**
+    * The See Gee index offset stored by this distribution
+    */
+  val index: Double
 }
-

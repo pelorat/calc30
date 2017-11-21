@@ -38,6 +38,16 @@ package object wbl {
     */
   val LbsPerKg = 2.20462262
 
+  /**
+    * Default %MAC at Empty Operating Weight
+    */
+  val dMAC = 41.2
+
+  /**
+    * The minimum empty operating weight in lbs (2 pilots + supplies )
+    */
+  val OperatingWeightEmpty = 23750.0
+
   /** Given a delta relative to the empty weight, returns a multiplier for
     * converting a SeeGee index value to a %MAC offset.
     *
@@ -45,4 +55,20 @@ package object wbl {
     * @return %MAC offset
     */
   def fMAC(lbs: Double): Double = (0.000000000673 * lbs - 0.0000392) * lbs + 1.15
+
+  /** Returns the optimal stabilizer trim setting for take-off given the current
+    * flap setting (10,20), the current %MAC and the aircraft weight.
+    *
+    * @param flap Integer representing the current flap setting (10,20).
+    * @param pmac Double representing the current %MAC.
+    * @param weight Double representing the current weight in lbs.
+    * @return A double with the calculated trim setting.
+    */
+  def fTrim(flap: Int, pmac: Double, weight: Double): Double = Math
+    .max(2.7, flap match {
+      case 10 => weight * (0.000488333 - 0.00000715 * pmac) + 0.0506 * pmac - 4.11
+      case 20 => weight * (0.000488333 - 0.00000715 * pmac) + 0.0466 * pmac - 4.22
+      case _ => 0.0
+    })
+
 }

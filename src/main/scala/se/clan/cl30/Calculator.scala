@@ -25,9 +25,6 @@ object Calculator {
   def main(args: Array[String]): Unit = {
 
     val table = Refs.load("refstable.cpd")
-
-    println(s"table.length = ${table.length}")
-
     val result = table.search(Entry(0,0,0,10,1244,29304,19))
 
     println(result.toString)
@@ -36,12 +33,19 @@ object Calculator {
     val fuel = FuelConfig(3000 * wbl.LbsPerKg)
     val paxMac = pax.index * wbl.fMAC(pax.weight)
     val fuelMac = fuel.index * wbl.fMAC(fuel.weight)
-    val totalMac = (pax.index + fuel.index) * wbl.fMAC(pax.weight + fuel.weight)
+    val offsetMac = (pax.index + fuel.index) * wbl.fMAC(pax.weight + fuel.weight)
+
+    val totalWeight = wbl.OperatingWeightEmpty + pax.weight + fuel.weight
+    val centerOfGravity = wbl.dMAC + offsetMac
 
     println(s"pax.weight = ${pax.weight}, pax.index = ${pax.index}, %MAC offset = $paxMac")
     println(s"fuel.weight = ${fuel.weight}, fuel.index = ${fuel.index}, %MAC offset = $fuelMac")
-    println(s"total weight = ${pax.weight + fuel.weight}, total index = ${pax.index + fuel.index}")
-    println(s"total %MAC offset = $totalMac")
+    println(s"total weight = $totalWeight, total index = ${pax.index + fuel.index}")
+    println(s"Final %MAC offset = $offsetMac")
+    println(s"Center of Gravity = $centerOfGravity %MAC")
+    println(s"Trim setting (10 flaps) = ${wbl.fTrim(10, centerOfGravity, totalWeight)}")
+    println(s"Trim setting (20 flaps) = ${wbl.fTrim(20, centerOfGravity, totalWeight)}")
+
   }
 
 }

@@ -31,13 +31,13 @@ class PaxConfig(weights: Array[Double])
   /**
     * The row order in which to fill the plane
     */
-  private lazy val loadOrder = Array(2, 2, 5, 1, 1, 3, 3, 5, 4, 6, 7, 7)
+  private lazy val loadOrder = Array(2, 2, 5, 1, 1, 3, 3, 5, 4, 6, 7)
 
   val weight: Double = weights.sum
 
   val index: Double = 0.2 * (loadOrder, weights)
     .zipped
-    .map((row, lbs) => degreesPerRow(row) * lbs)
+    .map((row, lbs) => degreesPerRow(row - 1) * lbs)
     .sum
 }
 
@@ -46,7 +46,5 @@ object PaxConfig {
     new PaxConfig(
       Array.tabulate(10) {
         x => if (x < pax) avg else 0.0
-      } ++ Array.fill(2) {
-        baggage / 2
-      })
+      } :+ baggage)
 }

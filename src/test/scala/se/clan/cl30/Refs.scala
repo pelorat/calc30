@@ -17,7 +17,7 @@ limitations under the License.
 package se.clan.cl30
 
 import org.scalatest._
-import se.clan.cl30.refs.Refs
+import se.clan.cl30.refs._
 
 class Refs extends FunSuite {
 

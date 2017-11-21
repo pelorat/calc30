@@ -40,7 +40,7 @@ object Refs {
 
   class SearchImpl(table: Table) {
     def search(entry: Entry): Option[Entry] =
-      table.filter(_ ~~ entry) match {
+      table.filter(_ :: entry) match {
         case IndexedSeq() => None
         case v => Some(v.minBy(e => Math.abs(e.temp - entry.temp)))
       }

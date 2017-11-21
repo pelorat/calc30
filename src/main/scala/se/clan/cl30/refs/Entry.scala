@@ -32,7 +32,7 @@ case class Entry(
                   vr: Int = 0,
                   v2: Int = 0,
                   rwl: Long = 0) {
-  def ~~(that: Entry): Boolean =
+  def ::(that: Entry): Boolean =
     surface == that.surface && bleed == that.bleed &&
       aice == that.aice && flaps == that.flaps &&
       Refs.clampAltitude(altitude) == that.altitude &&

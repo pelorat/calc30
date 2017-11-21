@@ -37,4 +37,12 @@ package object wbl {
     * Pounds per Kilogram
     */
   val LbsPerKg = 2.20462262
+
+  /** Given a delta relative to the empty weight, returns a multiplier for
+    * converting a SeeGee index value to a %MAC offset.
+    *
+    * @param lbs The weight in pounds (lbs)
+    * @return %MAC offset
+    */
+  def fMAC(lbs: Double): Double = (0.000000000673 * lbs - 0.0000392) * lbs + 1.15
 }

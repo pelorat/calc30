@@ -17,5 +17,6 @@ limitations under the License.
 package se.clan.cl30
 
 package object refs {
-  type Table = Vector[Entry]
+  type TakeoffTable = Vector[TakeoffEntry]
+  type LandingTable = Vector[LandingEntry]
 }

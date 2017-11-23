@@ -20,7 +20,7 @@ import scodec._
 import scodec.Codec
 import scodec.codecs._
 
-case class Entry(
+case class TakeoffEntry(
                   surface: Int,
                   bleed: Int,
                   aice: Int,
@@ -32,15 +32,15 @@ case class Entry(
                   vr: Int = 0,
                   v2: Int = 0,
                   rwl: Long = 0) {
-  def ::(that: Entry): Boolean =
+  def ::(that: TakeoffEntry): Boolean =
     surface == that.surface && bleed == that.bleed &&
       aice == that.aice && flaps == that.flaps &&
-      Refs.clampAltitude(altitude) == that.altitude &&
-      Refs.clampWeight(weight) == that.weight
+      TakeoffRefs.clampAltitude(altitude) == that.altitude &&
+      TakeoffRefs.clampWeight(weight) == that.weight
 }
 
-object Entry {
-  implicit val codec: Codec[Entry] = {
+object TakeoffEntry {
+  implicit val codec: Codec[TakeoffEntry] = {
     ("surface" | uint8L) ::
       ("bleed" | uint8L) ::
       ("aice" | uint8L) ::
@@ -52,7 +52,7 @@ object Entry {
       ("vr" | uint8L) ::
       ("v2" | uint8L) ::
       ("rwl" | uint32L)
-  }.as[Entry]
+  }.as[TakeoffEntry]
 
   def apply(surface: Int,
             bleed: Int,
@@ -61,5 +61,5 @@ object Entry {
             altitude: Long,
             weight: Long,
             temp: Int):
-  Entry = new Entry(surface, bleed, aice, flaps, altitude, weight, temp)
+  TakeoffEntry = new TakeoffEntry(surface, bleed, aice, flaps, altitude, weight, temp)
 }

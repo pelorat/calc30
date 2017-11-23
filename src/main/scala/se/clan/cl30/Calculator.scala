@@ -16,18 +16,24 @@ limitations under the License.
 
 package se.clan.cl30
 
-import se.clan.cl30.refs.{Entry, Refs}
-import se.clan.cl30.refs.Refs._
+import se.clan.cl30.refs.TakeoffRefs._
+import se.clan.cl30.refs.LandingRefs._
+import se.clan.cl30.refs.LandingRefs
+import se.clan.cl30.refs.{TakeoffEntry, TakeoffRefs}
 import se.clan.cl30.wbl.{FuelConfig, PaxConfig}
 
 object Calculator {
 
   def main(args: Array[String]): Unit = {
 
-    val table = Refs.load("takeoff_refs.bin")
-    val result = table.search(Entry(0,0,0,10,1244,29304,19))
+   val takeoffTable = TakeoffRefs.load("takeoff_refs.bin")
+   val landingTable = LandingRefs.load("landing_refs.bin")
 
-    println(result.toString)
+    val result1 = takeoffTable.search(TakeoffEntry(0,0,0,10,1244,29304,19))
+    val result2 = landingTable.search(28221, 1700)
+
+    println(result1.toString)
+    println(result2.toString)
 
     val pax = PaxConfig(5, 77 * wbl.LbsPerKg)
     val fuel = FuelConfig(3000 * wbl.LbsPerKg)

@@ -24,7 +24,7 @@ object Calculator {
 
   def main(args: Array[String]): Unit = {
 
-    val table = Refs.load("refstable.cpd")
+    val table = Refs.load("takeoff_refs.bin")
     val result = table.search(Entry(0,0,0,10,1244,29304,19))
 
     println(result.toString)

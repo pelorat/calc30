@@ -22,6 +22,7 @@ lazy val projectSettings = Seq(
 )
 
 lazy val dependencies = Seq(
+  "org.scala-lang.modules" % "scala-xml_2.12" % "1.0.6",
   "org.scodec" % "scodec-bits_2.12" % "1.1.5",
   "org.scodec" % "scodec-stream_2.12" % "1.1.0-M8",
 )
